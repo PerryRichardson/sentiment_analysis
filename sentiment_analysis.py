@@ -9,6 +9,7 @@ positive), and that score is mapped to a sentiment label.
 References:
 - https://www.expert.ai/blog/natural-language-processing/ -> Natural Language Processing (NLP) and sentiment analysis
 - https://www.expert.ai/blog/natural-language-processing-examples/? -> Examples of NLP applications
+- https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html -> pandas DataFrame iloc documentation
 """
 
 import pandas as pd
@@ -104,4 +105,13 @@ for review in preprocessed_reviews:
     print()
 
 # Note: Stop-word removal strips negation, and negation is central to sentiment.
+
+# Test the classifier on a few real reviews from the dataset.
+# .iloc selects by position, so it stays correct even if the index has gaps.
+for position in [0, 50, 200]:
+    review = clean_reviews.iloc[position]
+    sentiment = classify_sentiment(review)
+    print(f"Review: {review}")
+    print(f"Sentiment: {sentiment}")
+    print()
 
