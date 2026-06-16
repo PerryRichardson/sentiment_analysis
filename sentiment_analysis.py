@@ -17,3 +17,9 @@ reviews_df = pd.read_csv(
 # Confirm the size of the dataset and the exact column names.
 print("Shape:", reviews_df.shape)
 print("Columns:", reviews_df.columns.tolist())
+
+# Preprocessing:
+# Drop reviews with no text, then keep only the review column.
+clean_reviews = reviews_df.dropna(subset=["reviews.text"])
+clean_reviews = clean_reviews["reviews.text"]
+print("Reviews after cleaning:", len(clean_reviews))
