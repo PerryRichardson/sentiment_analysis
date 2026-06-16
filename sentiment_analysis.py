@@ -115,3 +115,21 @@ for position in [0, 50, 200]:
     print(f"Sentiment: {sentiment}")
     print()
 
+# Similarity function for comparing two reviews.
+def compare_reviews(review1, review2):
+    """Compare the similarity of two reviews.
+
+    Returns a similarity score between 0 and 1, where 1 means the
+    reviews are very similar in wording and topic.
+    """
+    doc1 = nlp(review1)
+    doc2 = nlp(review2)
+    return doc1.similarity(doc2)
+
+# Compare two reviews from the dataset.
+review_a = clean_reviews.iloc[0]
+review_b = clean_reviews.iloc[50]
+similarity_score = compare_reviews(review_a, review_b)
+print(f"Review A: {review_a}")
+print(f"Review B: {review_b}")
+print(f"Similarity between review 0 and review 50: {similarity_score:.2f}")
