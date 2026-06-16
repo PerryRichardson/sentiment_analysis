@@ -1,0 +1,13 @@
+# Dataset (too large / not version-controlled)
+Datafiniti_Amazon_Consumer_Reviews_of_Amazon_Products_May19.csv
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+.venv/
+
+# VS Code
+.vscode/
