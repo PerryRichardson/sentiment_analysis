@@ -80,3 +80,28 @@ for review in test_reviews:
     print(f"Review: {review}")
     print(f"Sentiment: {sentiment}")
     print()
+
+# Preprocessing function
+# To clean text and strip stop words.
+def preprocess_review(review):
+    """Preprocess a review by removing stop words and punctuation."""
+    doc = nlp(review)
+    tokens = [
+        token.lemma_
+        for token in doc
+        if not token.is_stop and not token.is_punct
+    ]
+    return " ".join(tokens)
+
+# Apply preprocessing to the test reviews.
+preprocessed_reviews = [preprocess_review(review) for review in test_reviews]
+
+# Classify the sentiment of each preprocessed review.
+for review in preprocessed_reviews:
+    sentiment = classify_sentiment(review)
+    print(f"Review: {review}")
+    print(f"Sentiment: {sentiment}")
+    print()
+
+# Note: Stop-word removal strips negation, and negation is central to sentiment.
+
