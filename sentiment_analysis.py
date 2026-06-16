@@ -26,6 +26,7 @@ print("Columns:", reviews_df.columns.tolist())
 
 # Preprocessing:
 # Drop reviews with no text, then keep only the review column.
+# new df to preserve the original df for later use if needed.
 clean_reviews = reviews_df.dropna(subset=["reviews.text"])
 clean_reviews = clean_reviews["reviews.text"]
 print("Reviews after cleaning:", len(clean_reviews))
@@ -37,3 +38,45 @@ nlp.add_pipe("spacytextblob")
 # Quick test of the sentiment analysis on a sample review.
 doc = nlp("This product is absolutely fantastic, I love it.")
 print("Polarity:", doc._.blob.polarity)
+
+# Classify a review as positive, negative, or neutral from its polarity.
+def classify_sentiment(polarity):
+    if polarity > 0.1:
+        return "positive"
+    elif polarity < -0.1:
+        return "negative"
+    else:
+        return "neutral"
+
+
+# Sentiment function
+# Classify a review as positive, negative, or neutral from its polarity.
+def classify_sentiment(review):
+    """Predict the sentiment of a single product review.
+
+    Runs the review through the spaCy pipeline, reads its polarity
+    score, and returns "positive", "negative", or "neutral". A score
+    above 0.1 counts as positive and below -0.1 as negative; the band
+    between them is treated as neutral.
+    """
+    doc = nlp(review)
+    polarity = doc._.blob.polarity
+    if polarity > 0.1:
+        return "positive"
+    elif polarity < -0.1:
+        return "negative"
+    else:
+        return "neutral"
+    
+# Apply the sentiment function to test reviews and print the results.
+test_reviews = [
+    "This product is absolutely fantastic, I love it.",
+    "This product is terrible, I hate it.",
+    "This product is okay, not great but not bad either.",
+]
+
+for review in test_reviews:
+    sentiment = classify_sentiment(review)
+    print(f"Review: {review}")
+    print(f"Sentiment: {sentiment}")
+    print()
