@@ -40,16 +40,6 @@ nlp.add_pipe("spacytextblob")
 doc = nlp("This product is absolutely fantastic, I love it.")
 print("Polarity:", doc._.blob.polarity)
 
-# Classify a review as positive, negative, or neutral from its polarity.
-def classify_sentiment(polarity):
-    if polarity > 0.1:
-        return "positive"
-    elif polarity < -0.1:
-        return "negative"
-    else:
-        return "neutral"
-
-
 # Sentiment function
 # Classify a review as positive, negative, or neutral from its polarity.
 def classify_sentiment(review):
