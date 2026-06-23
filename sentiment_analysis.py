@@ -7,9 +7,9 @@ scored on a polarity scale from -1 (very negative) to +1 (very
 positive), and that score is mapped to a sentiment label.
 
 References:
-- https://www.expert.ai/blog/natural-language-processing/ -> Natural Language Processing (NLP) and sentiment analysis
-- https://www.expert.ai/blog/natural-language-processing-examples/? -> Examples of NLP applications
-- https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html -> pandas DataFrame iloc documentation
+- https://www.expert.ai/blog/natural-language-processing/ -> Natural Language Processing (NLP) and sentiment analysis  # noqa: E501
+- https://www.expert.ai/blog/natural-language-processing-examples/? -> Examples of NLP applications  # noqa: E501
+- https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html -> pandas DataFrame iloc documentation  # noqa: E501
 """
 
 import pandas as pd
@@ -40,6 +40,7 @@ nlp.add_pipe("spacytextblob")
 doc = nlp("This product is absolutely fantastic, I love it.")
 print("Polarity:", doc._.blob.polarity)
 
+
 # Sentiment function
 # Classify a review as positive, negative, or neutral from its polarity.
 def classify_sentiment(review):
@@ -58,7 +59,8 @@ def classify_sentiment(review):
         return "negative"
     else:
         return "neutral"
-    
+
+
 # Apply the sentiment function to test reviews and print the results.
 test_reviews = [
     "This product is absolutely fantastic, I love it.",
@@ -72,6 +74,7 @@ for review in test_reviews:
     print(f"Sentiment: {sentiment}")
     print()
 
+
 # Preprocessing function
 # To clean text and strip stop words.
 def preprocess_review(review):
@@ -84,8 +87,12 @@ def preprocess_review(review):
     ]
     return " ".join(tokens)
 
+
 # Apply preprocessing to the test reviews.
-preprocessed_reviews = [preprocess_review(review) for review in test_reviews]
+preprocessed_reviews = [
+    preprocess_review(review)
+    for review in test_reviews
+]
 
 # Classify the sentiment of each preprocessed review.
 for review in preprocessed_reviews:
@@ -94,7 +101,7 @@ for review in preprocessed_reviews:
     print(f"Sentiment: {sentiment}")
     print()
 
-# Note: Stop-word removal strips negation, and negation is central to sentiment.
+# Note: stop-word removal strips negation, which drives sentiment.
 
 # Test the classifier on a few real reviews from the dataset.
 # .iloc selects by position, so it stays correct even if the index has gaps.
@@ -104,6 +111,7 @@ for position in [0, 50, 200]:
     print(f"Review: {review}")
     print(f"Sentiment: {sentiment}")
     print()
+
 
 # Similarity function for comparing two reviews.
 def compare_reviews(review1, review2):
@@ -115,6 +123,7 @@ def compare_reviews(review1, review2):
     doc1 = nlp(review1)
     doc2 = nlp(review2)
     return doc1.similarity(doc2)
+
 
 # Compare two reviews from the dataset.
 review_a = clean_reviews.iloc[0]
